@@ -12,6 +12,9 @@ export function useAssets() {
       ticker: asset.ticker,
       industry: asset.industry,
       lastClosePrice: asset.lastClosePrice,
+      logoUrl: asset.logoUrl,
+      sector: asset.sector,
+      shortDescription: asset.shortDescription,
     }))
   }
 

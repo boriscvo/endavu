@@ -1,7 +1,7 @@
 import { Asset, AssetsRequest } from "@/shared/types"
 import ASSETS from "./assets.json"
 
-const DEFAULT_PAGE_SIZE = 1
+const DEFAULT_PAGE_SIZE = 10
 
 export function resolver({ pageSize, startIndex, search }: AssetsRequest) {
   const pageSizeAdj = Number(pageSize || DEFAULT_PAGE_SIZE)

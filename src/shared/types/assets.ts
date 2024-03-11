@@ -46,5 +46,11 @@ export type AssetsResponse = {
 
 export type AssetSelected = Pick<
   Asset,
-  "name" | "ticker" | "industry" | "lastClosePrice" | "logoUrl"
+  | "name"
+  | "ticker"
+  | "industry"
+  | "lastClosePrice"
+  | "logoUrl"
+  | "sector"
+  | "shortDescription"
 >

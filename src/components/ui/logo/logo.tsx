@@ -12,13 +12,13 @@ export function Logo({ url, alt, size = "medium" }: Props) {
       case "medium":
         return "w-12 h-12"
       case "large":
-        return "w-24 h-24"
+        return "w-16 h-16"
     }
   }
 
   if (!url) {
-    return <div className={`m-2 ${getSize()} bg-zinc-800`}></div>
+    return <div className={`${getSize()} bg-zinc-800`}></div>
   }
 
-  return <img className={`m-2 ${getSize()}`} src={url} alt={alt || "logo"} />
+  return <img className={`${getSize()}`} src={url} alt={alt || "logo"} />
 }
