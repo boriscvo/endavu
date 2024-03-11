@@ -43,3 +43,8 @@ export type AssetsResponse = {
   assets: Asset[]
   total: number
 }
+
+export type AssetSelected = Pick<
+  Asset,
+  "name" | "ticker" | "industry" | "lastClosePrice" | "logoUrl"
+>

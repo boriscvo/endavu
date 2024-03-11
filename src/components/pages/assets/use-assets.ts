@@ -1,26 +1,26 @@
-import { Asset, AssetsRequest } from "@/shared/types"
-import { getQueryParams } from "@/shared/utils/get-query-params"
-import { useCallback, useEffect, useState } from "react"
+import { Asset, AssetSelected } from "@/shared/types"
+import { useEffect, useState } from "react"
+import { getAssets } from "@/shared/api"
 
 export function useAssets() {
-  const [assets, setAssets] = useState<Asset[] | null>(null)
+  const [assets, setAssets] = useState<AssetSelected[] | null>(null)
 
-  const getAssets = useCallback(async ({ search, pageSize }: AssetsRequest) => {
-    const queryParams = getQueryParams({ search, pageSize })
-
-    try {
-      const assetsResponse = await fetch(
-        `http://endavutest.com/assets/${queryParams}`
-      )
-      const jsonAssetsResponse = await assetsResponse.json()
-      setAssets(jsonAssetsResponse.assets)
-    } catch {
-      console.log("error")
-    }
-  }, [])
+  const getAssetCards = (assets: Asset[] | null): AssetSelected[] | null => {
+    if (!assets) return null
+    return assets.map((asset) => ({
+      name: asset.name,
+      ticker: asset.ticker,
+      industry: asset.industry,
+      lastClosePrice: asset.lastClosePrice,
+    }))
+  }
 
   useEffect(() => {
-    getAssets({})
+    const fetchAssets = async () => {
+      const assetsResponse = await getAssets({})
+      setAssets(getAssetCards(assetsResponse))
+    }
+    fetchAssets()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
