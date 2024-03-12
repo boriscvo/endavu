@@ -1,6 +1,5 @@
 import { Asset } from "@/shared/types"
-import { Icon, Logo } from "@/components/ui"
-import { Button } from "@/components/ui/button/button"
+import { Icon, Logo, Button } from "@/components/ui"
 
 type Props = {
   asset: Asset

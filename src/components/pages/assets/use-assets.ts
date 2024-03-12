@@ -11,16 +11,6 @@ export function useAssets() {
   const [typing, setTyping] = useState<string>("")
 
   useEffect(() => {
-    const fetchAssets = async () => {
-      const assetsResponse = await getAssets({})
-      setAssets(assetsResponse?.assets || null)
-      setTotalCount(assetsResponse?.total || 0)
-    }
-    fetchAssets()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
     if (search.length < 3 && search) {
       return
     }
