@@ -7,6 +7,8 @@ export function useAssets() {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null)
   const [isAssetModalOpen, setIsAssetModalOpen] = useState<boolean>(false)
   const [totalCount, setTotalCount] = useState<number>(0)
+  const [search, setSearch] = useState<string>("")
+  const [typing, setTyping] = useState<string>("")
 
   useEffect(() => {
     const fetchAssets = async () => {
@@ -17,6 +19,31 @@ export function useAssets() {
     fetchAssets()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (search.length < 3 && search) {
+      return
+    }
+    const fetchAssets = async () => {
+      const assetsResponse = await getAssets({ search })
+      setAssets(assetsResponse?.assets || null)
+      setTotalCount(assetsResponse?.total || 0)
+    }
+    fetchAssets()
+  }, [search])
+
+  const updateSearch = (search: string) => {
+    setTyping(search)
+  }
+
+  const handleSearch = () => {
+    setSearch(typing)
+  }
+
+  const handleReset = () => {
+    setSearch("")
+    setTyping("")
+  }
 
   const handleAssetSelection = useCallback(
     (id?: string) => {
@@ -39,6 +66,10 @@ export function useAssets() {
     totalCount,
     selectedAsset,
     isAssetModalOpen,
+    typing,
     handleAssetSelection,
+    updateSearch,
+    handleSearch,
+    handleReset,
   }
 }

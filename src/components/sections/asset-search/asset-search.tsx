@@ -1,10 +1,27 @@
 import { Search } from "@/components/ui/search/search"
 import { Container } from "./elements"
 
-export function AssetSearch() {
+type Props = {
+  typing: string
+  updateSearch: (search: string) => void
+  handleSearch: () => void
+  handleReset: () => void
+}
+
+export function AssetSearch({
+  typing,
+  updateSearch,
+  handleSearch,
+  handleReset,
+}: Props) {
   return (
     <Container>
-      <Search />
+      <Search
+        typing={typing}
+        updateSearch={updateSearch}
+        handleSearch={handleSearch}
+        handleReset={handleReset}
+      />
     </Container>
   )
 }

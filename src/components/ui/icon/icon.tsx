@@ -1,7 +1,7 @@
-import { Magnifier, Close } from "./variants"
+import { Magnifier, Close, IconX } from "./variants"
 
 type Props = {
-  variant: "magnifier" | "close"
+  variant: "magnifier" | "close" | "x"
 }
 
 export function Icon({ variant }: Props) {
@@ -10,5 +10,7 @@ export function Icon({ variant }: Props) {
       return <Magnifier />
     case "close":
       return <Close />
+    case "x":
+      return <IconX />
   }
 }

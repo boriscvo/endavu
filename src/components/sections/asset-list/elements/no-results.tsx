@@ -1,7 +1,7 @@
 export function NoResults() {
   return (
-    <div>
-      <p>No results found</p>
+    <div className="mt-4">
+      <p className="text-xl">No results found</p>
     </div>
   )
 }

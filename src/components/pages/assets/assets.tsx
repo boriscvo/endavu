@@ -10,12 +10,21 @@ export function Assets() {
     selectedAsset,
     isAssetModalOpen,
     totalCount,
+    typing,
+    updateSearch,
     handleAssetSelection,
+    handleSearch,
+    handleReset,
   } = useAssets()
   return (
     <PageContainer>
       <AssetsContainer>
-        <AssetSearch />
+        <AssetSearch
+          typing={typing}
+          updateSearch={updateSearch}
+          handleSearch={handleSearch}
+          handleReset={handleReset}
+        />
         <AssetList
           totalCount={totalCount}
           list={assets}
