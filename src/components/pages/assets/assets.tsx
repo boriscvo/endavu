@@ -5,13 +5,22 @@ import { ExtraContent, AssetsContainer } from "./elements"
 import { AssetModal } from "@/components/sections/asset-modal/asset-modal"
 
 export function Assets() {
-  const { assets, selectedAsset, isAssetModalOpen, handleAssetSelection } =
-    useAssets()
+  const {
+    assets,
+    selectedAsset,
+    isAssetModalOpen,
+    totalCount,
+    handleAssetSelection,
+  } = useAssets()
   return (
-    <PageContainer shouldDisableScroll={!!selectedAsset}>
+    <PageContainer>
       <AssetsContainer>
         <AssetSearch />
-        <AssetList list={assets} handleAssetSelection={handleAssetSelection} />
+        <AssetList
+          totalCount={totalCount}
+          list={assets}
+          handleAssetSelection={handleAssetSelection}
+        />
       </AssetsContainer>
       <ExtraContent />
       <AssetModal

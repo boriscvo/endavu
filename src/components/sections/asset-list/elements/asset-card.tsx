@@ -19,10 +19,10 @@ export function AssetCard({ asset, handleAssetSelection }: Props) {
   } = asset
 
   return (
-    <div className="border border-black2 shadow-custom flex rounded-lg flex-col mb-8">
-      <div className="pr-6">
-        <div className="pt-4 pl-2 flex">
-          <div className="flex-shrink-0">
+    <div className="border border-gray shadow-custom flex rounded-lg flex-col mb-8">
+      <div className="pr-4">
+        <div className="pt-4 md:pl-4 pl-2 flex">
+          <div className="hidden md:block flex-shrink-0">
             <Logo url={logoUrl} size="large" />
           </div>
           <div className="flex-grow pl-2">
@@ -31,11 +31,11 @@ export function AssetCard({ asset, handleAssetSelection }: Props) {
                 <div className="leading-4">
                   <p className="text-sm">{ticker}</p>
                 </div>
-                <div className="leading-5 mt-[0.125rem] mb-1 line-clamp-1 pr-1">
-                  <p className="text-2xl font-bold">{name}</p>
+                <div className="leading-6 md:leading-5 mt-[0.125rem] mb-1 line-clamp-2 md:line-clamp-1 pr-1">
+                  <h2 className="text-2xl font-bold">{name}</h2>
                 </div>
               </div>
-              <div className="leading-5 flex flex-col">
+              <div className="leading-5 flex flex-col mt-1">
                 <span className="text-2xl font-semibold ml-auto">{`${lastClosePrice}$`}</span>
                 <span className="text-sm ml-auto">Close Price</span>
               </div>
@@ -51,13 +51,13 @@ export function AssetCard({ asset, handleAssetSelection }: Props) {
           </div>
         </div>
       </div>
-      <div className="flex justify-between py-2 px-5 border-t border-black2">
+      <div className="flex justify-between py-2 px-4 border-t border-gray">
         <div className="flex">
           <Link onClick={() => handleAssetSelection(id)}>
             <span className="text-base">View More</span>
           </Link>
           <Link isDisabled>
-            <span className="text-base">Check Analytics</span>
+            <span className="text-base">Analytics</span>
           </Link>
         </div>
         <div>

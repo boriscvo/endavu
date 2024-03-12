@@ -6,11 +6,13 @@ export function useAssets() {
   const [assets, setAssets] = useState<Asset[] | null>(null)
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null)
   const [isAssetModalOpen, setIsAssetModalOpen] = useState<boolean>(false)
+  const [totalCount, setTotalCount] = useState<number>(0)
 
   useEffect(() => {
     const fetchAssets = async () => {
       const assetsResponse = await getAssets({})
-      setAssets(assetsResponse)
+      setAssets(assetsResponse?.assets || null)
+      setTotalCount(assetsResponse?.total || 0)
     }
     fetchAssets()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,6 +36,7 @@ export function useAssets() {
 
   return {
     assets,
+    totalCount,
     selectedAsset,
     isAssetModalOpen,
     handleAssetSelection,

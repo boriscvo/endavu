@@ -27,7 +27,7 @@ export function Content({ asset, handleAssetSelection }: Props) {
 
   return (
     <>
-      <div className="flex border-b border-blackVariant pb-2 px-4 items-center">
+      <div className="flex border-b border-gray pb-2 px-4 items-center">
         <div className="shrink-0">
           <Logo url={logoUrl} />
         </div>
@@ -38,7 +38,7 @@ export function Content({ asset, handleAssetSelection }: Props) {
           </Button>
         </div>
       </div>
-      <div className="border-b border-blackVariant py-4 px-6">
+      <div className="border-b border-gray py-4 px-6">
         <h3 className="font-semibold text-xl mb-4">Overview</h3>
         <p className="mb-1">
           <span className="font-semibold">Ticker:</span> {ticker}
@@ -57,7 +57,7 @@ export function Content({ asset, handleAssetSelection }: Props) {
           <span className="font-semibold">CEO:</span> {ceo || "Unknown"}
         </p>
       </div>
-      <div className="border-b border-blackVariant py-4 px-6">
+      <div className="border-b border-gray py-4 px-6">
         <h3 className="font-semibold text-xl mb-4">Company Description</h3>
         <p>{shortDescription}</p>
       </div>

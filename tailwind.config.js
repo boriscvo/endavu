@@ -20,7 +20,7 @@ export default {
         primary: "#1E40AF",
         secondary: "#64748B",
         blackVariant: "#1F2937",
-        black2: "#4A5568",
+        gray: "#CBD5E0",
         lightGray: "#F3F4F6",
         link: "#3182CE",
       },
