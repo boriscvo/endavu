@@ -3,7 +3,9 @@ type Props = {
 }
 export function PageContainer({ children }: Props) {
   return (
-    <div className="mx-auto p-4 sm:p-6 md:p-8 lg:p-10 xl:max-w-5xl flex flex-col md:flex-row">
+    <div
+      className={`p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col md:flex-row overflow-x-hidden max-h-screen w-screen`}
+    >
       {children}
     </div>
   )

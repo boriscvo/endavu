@@ -2,14 +2,22 @@ import { Link, Logo, Pill } from "@/components/ui"
 import { AssetSelected } from "@/shared/types"
 import { getSectorMark } from "../utils/get-sector-mark"
 
-export function AssetCard({
-  name,
-  ticker,
-  sector,
-  shortDescription,
-  lastClosePrice,
-  logoUrl,
-}: AssetSelected) {
+type Props = {
+  handleAssetSelection: (id: string) => void
+  asset: AssetSelected
+}
+
+export function AssetCard({ asset, handleAssetSelection }: Props) {
+  const {
+    name,
+    ticker,
+    sector,
+    shortDescription,
+    lastClosePrice,
+    logoUrl,
+    id,
+  } = asset
+
   return (
     <div className="border border-black2 shadow-custom flex rounded-lg flex-col mb-8">
       <div className="pr-6">
@@ -45,15 +53,15 @@ export function AssetCard({
       </div>
       <div className="flex justify-between py-2 px-5 border-t border-black2">
         <div className="flex">
-          <Link href="">
-            <span className="text-base">Learn More</span>
+          <Link onClick={() => handleAssetSelection(id)}>
+            <span className="text-base">View More</span>
           </Link>
-          <Link href="">
+          <Link isDisabled>
             <span className="text-base">Check Analytics</span>
           </Link>
         </div>
         <div>
-          <Link href="" isTrail>
+          <Link isDisabled isTrail>
             <span className="text-base">Trade Options</span>
           </Link>
         </div>

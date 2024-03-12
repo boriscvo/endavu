@@ -53,4 +53,5 @@ export type AssetSelected = Pick<
   | "logoUrl"
   | "sector"
   | "shortDescription"
+  | "id"
 >

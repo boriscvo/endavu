@@ -1,6 +1,6 @@
 type Props = {
   children: React.ReactNode
-  variant: "primary" | "secondary" | "search-addon"
+  variant: "primary" | "secondary" | "search-addon" | "close"
   onClick: () => void
 }
 
@@ -24,6 +24,16 @@ export function Button({ children, variant, onClick }: Props) {
           {children}
         </button>
       )
+    case "close": {
+      return (
+        <button
+          onClick={onClick}
+          className="bg-white p-2 rounded-lg border-2 border-blackVariant"
+        >
+          {children}
+        </button>
+      )
+    }
     case "primary":
     default:
       return (
