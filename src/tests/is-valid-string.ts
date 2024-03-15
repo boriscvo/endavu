@@ -61,9 +61,9 @@ export default function isValidString(input: string): boolean {
   }
 
   return (
-    getClosingBracketLogic() &&
     bracketsCount.open === bracketsCount.close &&
     bracketsCount.squareOpen === bracketsCount.squareClose &&
-    bracketsCount.angleOpen === bracketsCount.angleClose
+    bracketsCount.angleOpen === bracketsCount.angleClose &&
+    getClosingBracketLogic()
   )
 }
