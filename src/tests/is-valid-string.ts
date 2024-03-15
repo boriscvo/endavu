@@ -1,4 +1,13 @@
 export default function isValidString(input: string): boolean {
+  // Assumptions based on arrays' structure:
+  // - Must be equal number of brackets, order not important except for:
+  // -- If ")" exists it must be at the end of the string
+  // -- If "<" exists it must be followed by ">"; no nesting for angles
+
+  const REGULAR_ENDING_BRACKET = ")"
+  const ANGLE_OPEN_BRACKET = "<"
+  const ANGLE_CLOSE_BRACKET = ">"
+
   const bracketsInit = {
     open: 0,
     close: 0,
@@ -34,11 +43,17 @@ export default function isValidString(input: string): boolean {
   }, bracketsInit)
 
   const getClosingBracketLogic = () => {
-    if (input.indexOf("<") >= 0 && input[input.indexOf("<") + 1] !== ">") {
+    if (
+      input.includes(ANGLE_OPEN_BRACKET) &&
+      input[input.indexOf(ANGLE_OPEN_BRACKET) + 1] !== ANGLE_CLOSE_BRACKET
+    ) {
       return false
     }
 
-    if (input.includes(")") && !(input.slice(-1) === ")")) {
+    if (
+      input.includes(REGULAR_ENDING_BRACKET) &&
+      !(input.slice(-1) === REGULAR_ENDING_BRACKET)
+    ) {
       return false
     }
 
@@ -46,9 +61,9 @@ export default function isValidString(input: string): boolean {
   }
 
   return (
+    getClosingBracketLogic() &&
     bracketsCount.open === bracketsCount.close &&
     bracketsCount.squareOpen === bracketsCount.squareClose &&
-    bracketsCount.angleOpen === bracketsCount.angleClose &&
-    getClosingBracketLogic()
+    bracketsCount.angleOpen === bracketsCount.angleClose
   )
 }
