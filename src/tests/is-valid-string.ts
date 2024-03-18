@@ -1,69 +1,85 @@
 export default function isValidString(input: string): boolean {
-  // Assumptions based on arrays' structure:
-  // - Must be equal number of brackets, order not important except for:
-  // -- If ")" exists it must be at the end of the string
-  // -- If "<" exists it must be followed by ">"; no nesting for angles
-
-  const REGULAR_ENDING_BRACKET = ")"
+  const REGULAR_OPEN_BRACKET = "("
+  const REGULAR_CLOSE_BRACKET = ")"
   const ANGLE_OPEN_BRACKET = "<"
   const ANGLE_CLOSE_BRACKET = ">"
+  const SQUARED_OPEN_BRACKET = "["
+  const SQUARED_CLOSE_BRACKET = "]"
 
-  const bracketsInit = {
-    open: 0,
-    close: 0,
-    squareOpen: 0,
-    squareClose: 0,
-    angleOpen: 0,
-    angleClose: 0,
+  const OPEN_BRACKETS = [
+    REGULAR_OPEN_BRACKET,
+    ANGLE_OPEN_BRACKET,
+    SQUARED_OPEN_BRACKET,
+  ]
+
+  type InitBracketsSplit = { char: string; order: number }
+
+  const initBracketsSplit: {
+    opening: InitBracketsSplit[]
+    closing: InitBracketsSplit[]
+  } = {
+    opening: [],
+    closing: [],
   }
 
-  const bracketsCount = input.split("").reduce((acc, char) => {
-    switch (char) {
-      case "(":
-        acc.open++
-        break
-      case ")":
-        acc.close++
-        break
-      case "[":
-        acc.squareOpen++
-        break
-      case "]":
-        acc.squareClose++
-        break
-      case "<":
-        acc.angleOpen++
-        break
-      case ">":
-        acc.angleClose++
-        break
+  const areMatchingChars = (
+    opening: InitBracketsSplit,
+    closing: InitBracketsSplit
+  ) => {
+    if (
+      opening.char === REGULAR_OPEN_BRACKET &&
+      closing.char === REGULAR_CLOSE_BRACKET
+    ) {
+      return true
     }
+    if (
+      opening.char === ANGLE_OPEN_BRACKET &&
+      closing.char === ANGLE_CLOSE_BRACKET
+    ) {
+      return true
+    }
+    if (
+      opening.char === SQUARED_OPEN_BRACKET &&
+      closing.char === SQUARED_CLOSE_BRACKET
+    ) {
+      return true
+    }
+    return false
+  }
 
+  const bracketsSplit = input.split("").reduce((acc, char, i) => {
+    if (OPEN_BRACKETS.includes(char)) {
+      acc.opening.push({
+        char,
+        order: i,
+      })
+    } else {
+      acc.closing.push({
+        char,
+        order: i,
+      })
+    }
     return acc
-  }, bracketsInit)
+  }, initBracketsSplit)
 
-  const getClosingBracketLogic = () => {
-    if (
-      input.includes(ANGLE_OPEN_BRACKET) &&
-      input[input.indexOf(ANGLE_OPEN_BRACKET) + 1] !== ANGLE_CLOSE_BRACKET
-    ) {
+  const areBracketsMatching = bracketsSplit.closing.every((bracket, i) => {
+    const openingUntil = bracketsSplit.opening.filter(
+      (el) => el.order < bracket.order
+    )
+
+    if (!openingUntil.length || openingUntil.length - 1 - i < 0) {
       return false
     }
 
-    if (
-      input.includes(REGULAR_ENDING_BRACKET) &&
-      !(input.slice(-1) === REGULAR_ENDING_BRACKET)
-    ) {
-      return false
-    }
-
-    return true
-  }
+    // immediate or nested matching brackets
+    return !!(
+      areMatchingChars(openingUntil[openingUntil.length - 1], bracket) ||
+      areMatchingChars(openingUntil[openingUntil.length - 1 - i], bracket)
+    )
+  })
 
   return (
-    bracketsCount.open === bracketsCount.close &&
-    bracketsCount.squareOpen === bracketsCount.squareClose &&
-    bracketsCount.angleOpen === bracketsCount.angleClose &&
-    getClosingBracketLogic()
+    areBracketsMatching &&
+    bracketsSplit.opening.length === bracketsSplit.closing.length
   )
 }
